@@ -141,6 +141,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Learn.h" />
     <ClInclude Include="NeuralPractice.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Learn.cpp" />
     <ClCompile Include="NeuralPractice.cpp" />

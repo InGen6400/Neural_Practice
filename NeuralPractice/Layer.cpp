@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "Layer.h"
 
-Layer *Layer_New(int neuronCount) {
+Layer *Layer_New(int neuronCount, int prevCount) {
 	Layer *layer;
 	layer = (Layer*)malloc(sizeof(Layer));
-	layer->unit = (Neuron*)calloc(neuronCount+1, sizeof(Neuron));
 	layer->count = neuronCount+1;
-	
+	Layer_Init(layer);
 	return layer;
 }
 
@@ -14,12 +13,17 @@ void Layer_Init(Layer *layer) {
 	layer->unit[0].out = 1;
 }
 
+void Layer_InitAsInput(Layer *layer, double *input) {
+	layer->unit[0].out = 1;
+	memcpy(&layer->unit[1], input, sizeof(double) * INPUT_NUM);
+}
+
 void Layer_Delete(Layer *layer) {
 	free(layer->unit);
 	free(layer);
 }
 
-void Layer_CalcNeuron(const Layer *prevLayer, Layer *layer) {
+void Layer_CalcNeuron(Layer *layer, const Layer *prevLayer) {
 	int i, j;
 	double sum;
 	Neuron *nowNeuron;

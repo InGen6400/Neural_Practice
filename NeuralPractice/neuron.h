@@ -7,7 +7,9 @@ const double eps = 0.1;
 
 struct _Neuron {
 	double out;					//出力
-	double wheight[INPUT_NUM];	//ウェイト　重み
+	double *wheight;	//ウェイト　重み
 }typedef Neuron;
+
+void Neuron_Init(Neuron *neuron, int count);
 
 double sigmoid(double input);

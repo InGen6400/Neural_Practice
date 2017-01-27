@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "NeuralPractice.h"
+#include "Learn.h"
 
 #define MAX_LOADSTRING 100
 
@@ -28,11 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: ここにコードを挿入してください。
 
 
-
-
 	
-
-
 
 
 
@@ -46,6 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // アプリケーションの初期化を実行します:
     if (!InitInstance (hInstance, nCmdShow))
     {
+
         return FALSE;
     }
 
