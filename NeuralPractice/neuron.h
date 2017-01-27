@@ -6,11 +6,8 @@ const int OUT_NUM = 1;
 const double eps = 0.1;
 
 struct _Neuron {
-	double out;
-	double bias[INPUT_NUM];
-	double wheight[INPUT_NUM];
+	double out;					//出力
+	double wheight[INPUT_NUM];	//ウェイト　重み
 }typedef Neuron;
 
 double sigmoid(double input);
-
-void Neuron_Calc();
