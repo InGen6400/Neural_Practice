@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "neuron.h"
 #include "Layer.h"
+#include <stdio.h>
 
 void Learn() {
 
@@ -15,9 +16,11 @@ void Learn() {
 
 	Layer_InitAsInput(inputLayer, &input);
 
+
 	Layer_CalcNeuron(hiddenLayer, inputLayer);
+
 	Layer_CalcNeuron(outLayer, hiddenLayer);
 
-
+	printf("output:%f\n", outLayer->unit[1].out);
 
 }

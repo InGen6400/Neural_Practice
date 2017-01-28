@@ -10,7 +10,7 @@ struct _Neuron {
 	double *wheight;	//ウェイト　重み
 }typedef Neuron;
 
-void Neuron_New(Neuron *neuron, int count, int prevCount);
+Neuron *Neuron_New(int count, int prevCount);
 
 void Neuron_Init(Neuron *neuron, int count, int prevCount);
 

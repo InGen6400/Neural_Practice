@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include "Layer.h"
 
 Layer *Layer_New(int neuronCount, int prevCount) {
 	Layer *layer;
 	layer = (Layer*)malloc(sizeof(Layer));
-	Neuron_New(layer->unit, neuronCount, prevCount);
+	layer->unit = Neuron_New(neuronCount, prevCount);
 
+	//ニューロンの数+バイアス
 	layer->count = neuronCount+1;
 	Layer_Init(layer);
 	return layer;
@@ -15,9 +17,8 @@ Layer *Layer_New(int neuronCount, int prevCount) {
 void Layer_Init(Layer *layer) {
 }
 
-void Layer_InitAsInput(Layer *layer, double *input) {
-	layer->unit[0].out = 1;
-	memcpy(&layer->unit[1], input, sizeof(double) * INPUT_NUM);
+void Layer_InitAsInput(Layer *inputlayer, double *input) {
+	memcpy(&inputlayer->unit[1], input, sizeof(double) * INPUT_NUM);
 }
 
 void Layer_Delete(Layer *layer) {
@@ -30,15 +31,18 @@ void Layer_CalcNeuron(Layer *layer, const Layer *prevLayer) {
 	double sum;
 	Neuron *nowNeuron;
 
-	//layer層のすべてのニューロンに対して
-	for (i = 0; i < layer->count; i++) {
+	printf("neu count:%d\n", layer->unit[0].out);
+	//layer層のすべてのニューロンに対して(バイアスは除く)
+	for (i = 1; i < layer->count; i++) {
 
 		sum = 0;
 		nowNeuron = &layer->unit[i];
 		//すべての入力ユニットに対して重みづけ　-> 総和
 		for (j = 0; j < prevLayer->count; j++) {
-			sum += *nowNeuron->wheight * prevLayer->unit[j].out;
+			
+			sum += nowNeuron->wheight[j] * prevLayer->unit[j].out;
 		}
+		printf("sum:%f\n", sum);
 		//シグモイド関数で出力数値を得る
 		nowNeuron->out = sigmoid(sum);
 
