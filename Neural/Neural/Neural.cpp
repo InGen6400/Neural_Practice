@@ -6,7 +6,7 @@
 
 int main()
 {
-	Learn(1);
+	Learn(1000);
     return 0;
 }
 

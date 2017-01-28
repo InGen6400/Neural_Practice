@@ -3,6 +3,8 @@
 struct _Neuron
 {
 	double out;
+	double sum;
+	double DELTA;
 	double *w;
 }typedef Neuron;
 
@@ -13,3 +15,7 @@ void Neuron_Init(Neuron *neuron);
 double *Weight_New(int weightSize);
 
 double sigmoid(double in);
+
+double ReLU(double in);
+
+double d_ReLU(double in);

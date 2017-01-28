@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <stdlib.h>
 #include "Neuron.h"
+#include "Learn.h"
 #include <math.h>
 #include <random>
 
@@ -35,6 +36,20 @@ double *Weight_New(int weightSize) {
 
 double sigmoid(double in) {
 	return 1 / (1 + exp(-in));
+}
+
+double ReLU(double in) {
+	if (in < 0) {
+		return 0;
+	}
+	return in;
+}
+
+double d_ReLU(double in) {
+	if (in < 0) {
+		return 0;
+	}
+	return 1;
 }
 
 double d_sigmoid(double in) {

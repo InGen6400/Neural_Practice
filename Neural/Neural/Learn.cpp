@@ -13,6 +13,7 @@ void Learn(int loop) {
 
 	int Lcount = 0;
 	int Dcount = 0;
+	int OutCount = 0;
 
 	//”ä—áŠÖ”‚ÅÅ‰‚Í‚·
 	double input[DATA_AMOUNT][INPUT_SIZE] = { {1},{2},{3},{4} };
@@ -24,12 +25,27 @@ void Learn(int loop) {
 	for (Lcount = 0; Lcount < loop; Lcount++) {
 		for (Dcount = 0; Dcount < DATA_AMOUNT; Dcount++) {
 
-			Layer_SetInput(Input_Layer, input[Dcount]);
+			Layer_SetInput(Input_Layer, input[Dcount][0]);
 
 			Layer_Calc(Hidden_Layer, Input_Layer);
 			Layer_Calc(Output_Layer, Hidden_Layer);
 
-			printf("DATA%d : %lf -> %lf\n", Dcount, input[Dcount], Output_Layer->Element[1].out);
+			OutLayer_Update(Output_Layer, Hidden_Layer, Output_Layer->Element[1].out - correct[Dcount][0]);
+
+			Layer_Update(Hidden_Layer, Output_Layer, Input_Layer);
+
+			printf("DATA%d : %lf -> %lf\n", Dcount, input[Dcount][0], Output_Layer->Element[1].out);
 		}
+		putchar('\n');
+	}
+	printf("Complete\n\n");
+	double test[DATA_AMOUNT][1] = {{1.5}, {2.5}, {7.5}, {2.2}};
+	for (Dcount = 0; Dcount < DATA_AMOUNT; Dcount++) {
+		Layer_SetInput(Input_Layer, test[Dcount][0]);
+
+		Layer_Calc(Hidden_Layer, Input_Layer);
+		Layer_Calc(Output_Layer, Hidden_Layer);
+
+		printf("DATA%d : %lf -> %lf\n", Dcount, test[Dcount][0], Output_Layer->Element[1].out);
 	}
 }
