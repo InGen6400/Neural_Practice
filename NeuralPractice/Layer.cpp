@@ -1,18 +1,16 @@
 #include "stdafx.h"
-#include <stdlib.h>
 #include "Layer.h"
 
 Layer *Layer_New(int neuronCount, int prevCount) {
 	Layer *layer;
 	layer = (Layer*)malloc(sizeof(Layer));
-	Neuron_New(layer->unit, neuronCount, prevCount);
-
 	layer->count = neuronCount+1;
 	Layer_Init(layer);
 	return layer;
 }
 
 void Layer_Init(Layer *layer) {
+	layer->unit[0].out = 1;
 }
 
 void Layer_InitAsInput(Layer *layer, double *input) {
